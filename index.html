@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>句乐部 - 像玩游戏一样，用句子学英语</title>
+<style>
+:root {
+  --p: #4F46E5; --pl: #818CF8; --pd: #3730A3;
+  --ac: #F59E0B; --sc: #10B981; --er: #EF4444;
+  --bg: #F8FAFC; --ca: #fff; --t: #1E293B; --tm: #64748B; --bd: #E2E8F0;
+  --r: 16px; --rs: 8px;
+  --sh: 0 4px 24px rgba(0,0,0,.06); --shl: 0 12px 48px rgba(0,0,0,.1);
+  --mw: 1200px;
+  --f: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);color:var(--t);background:var(--bg);line-height:1.6}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd)}
+.nav-inner{max-width:var(--mw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.nav-logo{font-size:22px;font-weight:800;color:var(--p);letter-spacing:-.5px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--tm);text-decoration:none;font-size:15px;transition:color .2s}
+.nav-links a:hover{color:var(--t)}
+.nav-btn{background:var(--p);color:#fff;border:none;padding:10px 24px;border-radius:24px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.nav-btn:hover{background:var(--pd);transform:translateY(-1px)}
+
+/* Hero */
+.hero{padding:140px 24px 80px;text-align:center;max-width:800px;margin:0 auto}
+.hero-badge{display:inline-block;background:linear-gradient(135deg,#EEF2FF,#E0E7FF);color:var(--p);padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;margin-bottom:24px}
+.hero h1{font-size:52px;font-weight:900;line-height:1.2;letter-spacing:-1px;margin-bottom:16px;background:linear-gradient(135deg,#1E293B,#4F46E5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:20px;color:var(--tm);margin-bottom:32px}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.bp{background:var(--p);color:#fff;border:none;padding:16px 40px;border-radius:32px;font-size:18px;font-weight:700;cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(79,70,229,.3)}
+.bp:hover{background:var(--pd);transform:translateY(-2px);box-shadow:0 8px 30px rgba(79,70,229,.4)}
+.bo{background:#fff;color:var(--p);border:2px solid var(--p);padding:16px 40px;border-radius:32px;font-size:18px;font-weight:700;cursor:pointer;transition:all .2s}
+.bo:hover{background:#EEF2FF;transform:translateY(-2px)}
+
+/* Demo */
+.demo{max-width:1000px;margin:0 auto 80px;padding:0 24px}
+.dw{background:var(--ca);border-radius:var(--r);box-shadow:var(--shl);overflow:hidden;border:1px solid var(--bd)}
+.dwh{background:#1E293B;padding:12px 20px;display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot:nth-child(1){background:#EF4444}.dot:nth-child(2){background:#F59E0B}.dot:nth-child(3){background:#10B981}
+.dwb{padding:40px}
+.ds{font-size:24px;font-weight:600;margin-bottom:16px;color:var(--t)}
+.dwords{display:flex;flex-wrap:wrap;gap:8px}
+.dw2{padding:8px 16px;border-radius:var(--rs);font-size:16px;display:flex;flex-direction:column;align-items:center}
+.dw2.en{font-weight:600}
+.dw2.zh{font-size:12px;color:var(--tm)}
+.dw2.pn{background:#FEE2E2;color:#DC2626}
+.dw2.vb{background:#DBEAFE;color:#2563EB}
+.dw2.aj{background:#FEF3C7;color:#D97706}
+.dw2.nn{background:#D1FAE5;color:#059669}
+.dw2.ot{background:#F3E8FF;color:#7C3AED}
+.dinp{margin-top:24px;padding:14px 20px;border:2px solid var(--bd);border-radius:var(--rs);font-size:18px;width:100%;outline:none;transition:border .2s}
+
+/* Stats */
+.stats{background:linear-gradient(135deg,#4F46E5,#7C3AED);padding:60px 24px;color:#fff;text-align:center}
+.sg{display:flex;justify-content:center;gap:64px;flex-wrap:wrap;max-width:var(--mw);margin:0 auto}
+.si2{text-align:center}
+.sn2{font-size:48px;font-weight:900;line-height:1}
+.sl2{font-size:16px;opacity:.8;margin-top:8px}
+
+/* Sections */
+.sec{padding:80px 24px}
+.st{text-align:center;font-size:36px;font-weight:900;margin-bottom:16px}
+.ss{text-align:center;color:var(--tm);font-size:18px;margin-bottom:48px}
+.features{max-width:var(--mw);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.fc{background:var(--ca);border-radius:var(--r);padding:32px;box-shadow:var(--sh);border:1px solid var(--bd);transition:transform .2s}
+.fc:hover{transform:translateY(-4px)}
+.fi2{font-size:40px;margin-bottom:16px}
+.ft{font-size:20px;font-weight:700;margin-bottom:8px}
+.fd{color:var(--tm);font-size:15px;line-height:1.7}
+
+/* Testimonials */
+.tml{max-width:var(--mw);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+.tc{background:var(--ca);border-radius:var(--r);padding:28px;box-shadow:var(--sh);border:1px solid var(--bd)}
+.tt{font-size:16px;line-height:1.8;margin-bottom:16px;color:var(--t);font-style:italic}
+.tt::before{content:'"';color:var(--p)}.tt::after{content:'"';color:var(--p)}
+.ta2{display:flex;align-items:center;gap:12px}
+.tav{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--pl),var(--p));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+.tn2{font-weight:700;font-size:15px}
+.tr{color:var(--tm);font-size:13px}
+
+/* Pricing */
+.pg{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+.pc{background:var(--ca);border-radius:var(--r);padding:32px;text-align:center;box-shadow:var(--sh);border:2px solid var(--bd);transition:all .3s;position:relative}
+.pc.feat{border-color:var(--p);box-shadow:var(--shl);transform:scale(1.03)}
+.pbadge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--ac);color:#fff;padding:4px 20px;border-radius:20px;font-size:13px;font-weight:700}
+.pn2{font-size:20px;font-weight:700;margin-bottom:8px}
+.pa2{font-size:42px;font-weight:900;color:var(--p);margin-bottom:4px}
+.pp2{color:var(--tm);font-size:14px;margin-bottom:24px}
+.pf{list-style:none;text-align:left;margin-bottom:24px}
+.pf li{padding:8px 0;color:var(--tm);font-size:14px}
+.pf li::before{content:'✓';color:var(--sc);margin-right:8px;font-weight:700}
+.pbtn{width:100%;padding:14px;border-radius:28px;font-size:16px;font-weight:700;cursor:pointer;transition:all .2s}
+.pbtn.pri{background:var(--p);color:#fff;border:none}.pbtn.pri:hover{background:var(--pd)}
+.pbtn.out{background:#fff;color:var(--p);border:2px solid var(--p)}.pbtn.out:hover{background:#EEF2FF}
+
+/* FAQ */
+.faq{max-width:720px;margin:0 auto}
+.fqi{background:var(--ca);border-radius:var(--r);margin-bottom:12px;box-shadow:var(--sh);border:1px solid var(--bd);overflow:hidden}
+.fqq{padding:20px 24px;font-weight:700;font-size:16px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.fqq:hover{background:#F8FAFC}
+.fqa{padding:0 24px;max-height:0;overflow:hidden;transition:all .3s;color:var(--tm);line-height:1.8}
+.fqi.open .fqa{padding:0 24px 20px;max-height:300px}
+.fqi.open .farrow{transform:rotate(180deg)}
+.farrow{transition:transform .3s;font-size:12px;color:var(--tm)}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,#1E293B,#4F46E5);padding:80px 24px;text-align:center;color:#fff}
+.cta h2{font-size:40px;font-weight:900;margin-bottom:16px}
+.cta p{font-size:18px;opacity:.85;margin-bottom:32px}
+.ctabtn{background:#fff;color:var(--p);border:none;padding:18px 48px;border-radius:36px;font-size:20px;font-weight:700;cursor:pointer;transition:all .2s}
+.ctabtn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,255,255,.2)}
+
+/* Footer */
+.ftr{background:#1E293B;color:#94A3B8;padding:48px 24px 32px}
+.fg{max-width:var(--mw);margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:32px}
+.fc2 h4{color:#fff;font-size:16px;margin-bottom:16px}
+.fc2 a{display:block;color:#94A3B8;text-decoration:none;margin-bottom:8px;font-size:14px;transition:color .2s}
+.fc2 a:hover{color:#fff}
+.fb{max-width:var(--mw);margin:32px auto 0;padding-top:24px;border-top:1px solid #334155;text-align:center;font-size:13px}
+
+/* ============ APP ============ */
+.ac{display:none;height:100vh;background:#0F172A;overflow:hidden}
+.ac.on{display:flex;flex-direction:column}
+
+/* Top bar */
+.atop{background:#1E293B;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;color:#fff;flex-shrink:0;border-bottom:1px solid #334155}
+.atop-l{display:flex;align-items:center;gap:12px}
+.aback{color:#94A3B8;background:none;border:none;cursor:pointer;font-size:18px;padding:4px 8px}
+.aback:hover{color:#fff}
+.atitle{font-weight:700;font-size:16px}
+.atop-r{display:flex;align-items:center;gap:12px}
+.atop-stat{font-size:12px;color:#94A3B8}
+.atop-stat b{color:#fff;font-size:14px}
+
+/* Main layout: 3 columns in practice, or just center in mode select */
+.alayout{display:flex;flex:1;overflow:hidden}
+
+/* Left panel - sentence list */
+.ap-left{width:300px;background:#1E293B;border-right:1px solid #334155;display:flex;flex-direction:column;flex-shrink:0}
+.ap-left-header{padding:12px 16px;border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center}
+.ap-left-header-t{color:#fff;font-size:14px;font-weight:700}
+.ap-left-count{color:#94A3B8;font-size:12px}
+.ap-left-list{flex:1;overflow-y:auto;padding:4px}
+.ap-sent{padding:10px 12px;cursor:pointer;border-radius:6px;margin:2px 0;transition:all .15s;display:flex;align-items:flex-start;gap:8px}
+.ap-sent:hover{background:#334155}
+.ap-sent.on{background:rgba(79,70,229,.2);border-left:3px solid var(--p)}
+.ap-sent-idx{color:#475569;font-size:11px;min-width:22px;padding-top:1px;font-weight:600}
+.ap-sent-text{color:#94A3B8;font-size:13px;line-height:1.5}
+.ap-sent.on .ap-sent-text{color:#fff}
+.ap-sent-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.ap-sent-dot.ok{background:var(--sc)}.ap-sent-dot.wrong{background:var(--er)}.ap-sent-dot.pending{background:#475569}
+
+/* Center panel - practice */
+.ap-center{flex:1;padding:32px;overflow-y:auto;display:flex;flex-direction:column;align-items:center}
+.ap-center-inner{width:100%;max-width:700px}
+.ap-mode-label{color:var(--pl);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.ap-zh{color:#94A3B8;font-size:18px;margin-bottom:8px;min-height:28px}
+.ap-en-words{display:flex;flex-wrap:wrap;gap:4px 6px;margin-bottom:20px}
+.ap-word{font-size:22px;font-weight:600;cursor:pointer;transition:all .15s;border-bottom:2px solid;padding-bottom:2px;position:relative}
+.ap-word:hover{opacity:.8}
+.ap-word.pn{color:#F87171;border-color:#F87171}
+.ap-word.vb{color:#60A5FA;border-color:#60A5FA}
+.ap-word.aj{color:#FBBF24;border-color:#FBBF24}
+.ap-word.nn{color:#34D399;border-color:#34D399}
+.ap-word.ot{color:#A78BFA;border-color:#A78BFA}
+.ap-word.dt{color:#FB923C;border-color:#FB923C}
+.ap-word.pr{color:#F472B6;border-color:#F472B6}
+.ap-word.av{color:#38BDF8;border-color:#38BDF8}
+
+/* Input */
+.ap-input-w{position:relative;width:100%}
+.ap-mirror{width:100%;padding:14px 18px;border-radius:var(--rs);background:#1E293B;border:2px solid #334155;font-size:18px;font-family:"SF Mono","Fira Code","Consolas",monospace;min-height:56px;pointer-events:none;white-space:pre-wrap;overflow:hidden;transition:border .2s}
+.ap-mirror.focus{border-color:var(--pl)}
+.ap-mirror .m-correct{color:#34D399}
+.ap-mirror .m-wrong{color:#F87171;text-decoration:underline wavy #F87171}
+.ap-mirror .m-pending{color:#334155}
+.ap-mirror .m-cursor{color:var(--ac);border-left:2px solid var(--ac);animation:blink 1s step-end infinite}
+@keyframes blink{50%{border-left-color:transparent}}
+.ap-input{position:absolute;top:0;left:0;width:100%;height:100%;padding:14px 18px;border-radius:var(--rs);border:2px solid transparent;background:transparent;color:transparent;font-size:18px;font-family:"SF Mono","Fira Code","Consolas",monospace;outline:none;caret-color:var(--ac);z-index:2}
+.ap-input:focus{border-color:var(--pl)}
+
+/* Feedback */
+.ap-fb{text-align:center;margin-top:12px;font-size:18px;font-weight:700;min-height:32px}
+.ap-fb .ok{color:var(--sc)}.ap-fb .bad{color:var(--er)}.ap-fb .skip{color:#475569}
+.ap-combo{text-align:center;margin-top:4px;color:var(--ac);font-size:14px;min-height:20px}
+.ap-actions{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.ap-act-btn{padding:10px 28px;border-radius:24px;border:1px solid #334155;background:#1E293B;color:#fff;font-size:14px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.ap-act-btn:hover{background:#334155}
+.ap-act-btn.pri{background:var(--p);border-color:var(--p)}
+.ap-act-btn.pri:hover{background:var(--pd)}
+.ap-shortcuts{display:flex;justify-content:center;gap:16px;margin-top:12px;color:#475569;font-size:12px;flex-wrap:wrap}
+
+/* Right panel - knowledge */
+.ap-right{width:340px;background:#1E293B;border-left:1px solid #334155;overflow-y:auto;flex-shrink:0;display:flex;flex-direction:column}
+.ap-right-header{padding:12px 16px;border-bottom:1px solid #334155;color:#fff;font-size:14px;font-weight:700}
+.ap-right-body{padding:16px;display:flex;flex-direction:column;gap:12px}
+.kp-section{background:#0F172A;border-radius:var(--rs);padding:14px}
+.kp-section-title{color:var(--pl);font-size:11px;font-weight:700;text-transform:uppercase;margin-bottom:8px;letter-spacing:.5px}
+.kp-zh{color:#fff;font-size:16px;margin-bottom:4px}
+.kp-en-explain{color:#94A3B8;font-size:13px;line-height:1.6}
+.kp-word-item{background:#0F172A;border-radius:var(--rs);padding:12px;margin-bottom:8px}
+.kp-word-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.kp-word-text{font-size:20px;font-weight:700;color:#fff}
+.kp-word-phonetic{color:var(--tm);font-size:13px}
+.kp-word-pos{font-size:12px;padding:1px 8px;border-radius:10px;font-weight:600}
+.kp-word-pos.pn{background:rgba(248,113,113,.15);color:#F87171}
+.kp-word-pos.vb{background:rgba(96,165,250,.15);color:#60A5FA}
+.kp-word-pos.aj{background:rgba(251,191,36,.15);color:#FBBF24}
+.kp-word-pos.nn{background:rgba(52,211,153,.15);color:#34D399}
+.kp-word-pos.ot{background:rgba(167,139,250,.15);color:#A78BFA}
+.kp-word-pos.dt{background:rgba(251,146,60,.15);color:#FB923C}
+.kp-word-pos.pr{background:rgba(244,114,182,.15);color:#F472B6}
+.kp-word-pos.av{background:rgba(56,189,248,.15);color:#38BDF8}
+.kp-word-meaning{color:#94A3B8;font-size:14px;margin-bottom:6px}
+.kp-word-syn,.kp-word-ant,.kp-word-exam,.kp-word-tip{font-size:12px;color:#64748B;margin-bottom:4px;line-height:1.5}
+.kp-word-syn b,.kp-word-ant b,.kp-word-exam b,.kp-word-tip b{color:#94A3B8}
+.kp-word-exam{color:#34D399}
+.kp-word-tip{color:var(--ac)}
+.kp-empty{color:#475569;text-align:center;padding:40px 16px;font-size:14px;line-height:1.8}
+
+/* Mode select modal */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center}
+.mo.show{display:flex}
+.mod{background:#1E293B;border-radius:var(--r);padding:40px;text-align:center;max-width:500px;width:90%;color:#fff;max-height:90vh;overflow-y:auto}
+.mod h3{font-size:24px;margin-bottom:8px}
+.mod .sub{color:#94A3B8;font-size:14px;margin-bottom:24px}
+.m-mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.m-mode{background:#0F172A;border:2px solid #334155;border-radius:var(--rs);padding:20px 16px;cursor:pointer;text-align:center;transition:all .15s}
+.m-mode:hover{border-color:var(--pl);background:#1a2340}
+.m-mode.sel{border-color:var(--p);background:rgba(79,70,229,.1)}
+.m-mode-icon{font-size:36px;margin-bottom:8px}
+.m-mode-name{font-size:16px;font-weight:700;margin-bottom:4px}
+.m-mode-desc{font-size:12px;color:#64748B;line-height:1.5}
+.mbtn{padding:12px 36px;border-radius:24px;font-size:15px;font-weight:700;cursor:pointer;border:none;margin:4px;transition:all .15s}
+.mbtn.pri{background:var(--p);color:#fff}.mbtn.pri:hover{background:var(--pd)}
+.mbtn.sec{background:#334155;color:#fff}.mbtn.sec:hover{background:#475569}
+.mbtn.warn{background:var(--er);color:#fff}.mbtn.warn:hover{background:#DC2626}
+
+/* Completion modal */
+.grade{font-size:72px;font-weight:900;margin:16px 0}
+.grade.s{color:#F59E0B}.grade.a{color:#10B981}.grade.b{color:#3B82F6}.grade.c{color:#94A3B8}
+.mstats2{display:flex;justify-content:center;gap:24px;margin:24px 0}
+.mst2{text-align:center}.mstv{font-size:24px;font-weight:700}.mstl{font-size:12px;color:#94A3B8}
+
+/* Editor area (in left panel alternate) */
+.editor-area2{padding:16px;display:flex;flex-direction:column;gap:10px}
+.editor-ta2{width:100%;height:150px;background:#0F172A;color:#fff;border:1px solid #334155;border-radius:var(--rs);padding:12px;font-size:13px;font-family:var(--f);resize:vertical;outline:none}
+.editor-ta2:focus{border-color:var(--pl)}
+.editor-btn2{background:var(--p);color:#fff;border:none;padding:10px;border-radius:20px;font-size:14px;font-weight:600;cursor:pointer;width:100%}
+.editor-btn2:hover{background:var(--pd)}
+.editor-preview2{font-size:12px;color:#94A3B8;min-height:20px}
+
+/* Sidebar tabs */
+.atabs2{display:flex;gap:2px;padding:8px 16px;background:#1E293B;border-bottom:1px solid #334155}
+.atab2{flex:1;padding:6px;text-align:center;font-size:12px;border-radius:6px;cursor:pointer;color:#94A3B8;transition:all .2s;border:none;background:none}
+.atab2.on{background:var(--p);color:#fff}
+
+/* Review badge */
+.review-badge2{background:var(--er);color:#fff;font-size:10px;padding:0 6px;border-radius:8px;margin-left:4px;display:none}
+.review-badge2.show{display:inline}
+
+/* Mobile */
+@media(max-width:900px){
+  /* Landing */
+  .hero h1{font-size:30px}.hero p{font-size:15px}
+  .hero{padding:100px 16px 50px}
+  .hero-btns{flex-direction:column;align-items:center;gap:10px}
+  .bp,.bo{width:100%;max-width:300px;padding:14px 20px;font-size:16px}
+  .sg{gap:20px;flex-wrap:wrap}.sn2{font-size:28px}
+  .st{font-size:24px}
+  .nav-links{display:none}
+  .pc.feat{transform:none}
+  .pg{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .tml{grid-template-columns:1fr}
+  .dwb{padding:20px}
+  .ds{font-size:18px}
+  .fg{grid-template-columns:1fr 1fr}
+  .sec{padding:48px 16px}
+  .demo{padding:0 12px;margin-bottom:48px}
+
+  /* App */
+  .ac.on{flex-direction:column}
+  .atop{padding:8px 12px}
+  .atop-r{gap:8px;overflow-x:auto;flex-wrap:nowrap}
+  .atop-stat{font-size:10px;white-space:nowrap}
+  .atop-stat b{font-size:12px}
+  .atitle{font-size:14px}
+  .alayout{flex-direction:column;overflow-y:auto}
+
+  /* Left panel becomes collapsible drawer */
+  .ap-left{width:100%;max-height:0;overflow:hidden;transition:max-height .3s;border-right:none;border-bottom:1px solid #334155}
+  .ap-left.open{max-height:50vh;overflow-y:auto}
+  .ap-left-toggle{display:flex!important;align-items:center;gap:4px;padding:8px 16px;background:#1E293B;color:#94A3B8;border:none;font-size:12px;cursor:pointer;border-bottom:1px solid #334155}
+  .ap-left-toggle:hover{color:#fff}
+
+  /* Center */
+  .ap-center{padding:16px;flex:1;overflow-y:auto}
+  .ap-center-inner{max-width:100%}
+  .ap-en-words{gap:3px 4px}
+  .ap-word{font-size:18px}
+  .ap-mirror,.ap-input{font-size:16px;padding:12px 14px}
+  .ap-zh{font-size:15px}
+  .ap-shortcuts{flex-wrap:wrap;gap:8px;font-size:10px}
+
+  /* Right panel becomes modal-like */
+  .ap-right{width:100%;max-height:0;overflow:hidden;transition:max-height .3s;border-left:none;border-top:1px solid #334155}
+  .ap-right.open{max-height:60vh;overflow-y:auto}
+  .ap-right-toggle{display:flex!important;align-items:center;gap:4px;padding:8px 16px;background:#1E293B;color:#94A3B8;border:none;font-size:12px;cursor:pointer}
+  .ap-right-toggle:hover{color:#fff}
+
+  /* Modals */
+  .mod{padding:24px;max-width:95%}
+  .mod h3{font-size:20px}
+  .m-mode-grid{grid-template-columns:1fr}
+  .grade{font-size:52px}
+
+  /* Editor */
+  .editor-ta2{height:120px;font-size:14px}
+}
+@media(max-width:400px){
+  .hero h1{font-size:24px}
+  .ap-word{font-size:16px}
+  .ap-actions{gap:6px}
+  .ap-act-btn{padding:8px 16px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- ======= LANDING ======= -->
+<nav class="nav"><div class="nav-inner">
+  <div class="nav-logo">🎯 句乐部</div>
+  <div class="nav-links">
+    <a href="#features">功能</a><a href="#pricing">价格</a><a href="#faq">常见问题</a>
+    <button class="nav-btn" onclick="startPractice()">免费体验</button>
+  </div>
+</div></nav>
+
+<section class="hero">
+  <div class="hero-badge">🏆 70万+ 学习者的选择</div>
+  <h1>像玩游戏一样，<br>用句子学英语</h1>
+  <p>谨慎体验，小心上瘾。你不是在背单词，你是在打怪升级。</p>
+  <div class="hero-btns">
+    <button class="bp" onclick="startPractice()">🎮 先玩一把</button>
+    <button class="bo" onclick="document.getElementById('features').scrollIntoView()">了解更多</button>
+  </div>
+</section>
+
+<section class="demo"><div class="dw">
+  <div class="dwh"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+  <div class="dwb">
+    <div class="ds">I / like / to / eat / fresh / apples / every / morning</div>
+    <div class="dwords">
+      <div class="dw2 pn"><span class="en">I</span><span class="zh">代词</span></div>
+      <div class="dw2 vb"><span class="en">like</span><span class="zh">动词</span></div>
+      <div class="dw2 ot"><span class="en">to</span><span class="zh">不定式</span></div>
+      <div class="dw2 vb"><span class="en">eat</span><span class="zh">动词</span></div>
+      <div class="dw2 aj"><span class="en">fresh</span><span class="zh">形容词</span></div>
+      <div class="dw2 nn"><span class="en">apples</span><span class="zh">名词</span></div>
+      <div class="dw2 ot"><span class="en">every</span><span class="zh">限定词</span></div>
+      <div class="dw2 nn"><span class="en">morning</span><span class="zh">名词</span></div>
+    </div>
+    <div style="margin-top:16px;color:var(--tm);font-size:14px">我喜欢每天早上吃新鲜的苹果。</div>
+    <input class="dinp" placeholder="输入上方句子试试 →" disabled>
+  </div>
+</div></section>
+
+<section class="stats"><div class="sg">
+  <div class="si2"><div class="sn2">70万+</div><div class="sl2">注册用户</div></div>
+  <div class="si2"><div class="sn2">100万+</div><div class="sl2">累计学习小时</div></div>
+  <div class="si2"><div class="sn2">4200万+</div><div class="sl2">练习完成次数</div></div>
+  <div class="si2"><div class="sn2">40分钟</div><div class="sl2">平均每次学习时长</div></div>
+</div></section>
+
+<section id="features" class="sec">
+  <h2 class="st">为什么选句乐部</h2><p class="ss">从句子出发，告别死记硬背</p>
+  <div class="features">
+    <div class="fc"><div class="fi2">🎮</div><div class="ft">连对越多，越想继续</div><div class="fd">连续的正确答案触发连击特效和积分加成。就像打游戏一样，根本停不下来。</div></div>
+    <div class="fc"><div class="fi2">🧠</div><div class="ft">忘了的词，它比你先想起来</div><div class="fd">智能间隔复习系统自动追踪薄弱点，在你快忘记的时候精准推送复习。</div></div>
+    <div class="fc"><div class="fi2">🤖</div><div class="ft">AI 老师，随时解答</div><div class="fd">遇到不懂的语法用法直接问 AI。带着真实问题去学，比被动听课高效得多。</div></div>
+    <div class="fc"><div class="fi2">✏️</div><div class="ft">任何内容，都能变成练习</div><div class="fd">想练什么就导入什么——课文、歌词、电影台词、工作邮件。自动拆句、出题。</div></div>
+    <div class="fc"><div class="fi2">📊</div><div class="ft">学习报告，一目了然</div><div class="fd">学了多久、练了多少、正确率变化，家长和老师随时查看成长数据。</div></div>
+    <div class="fc"><div class="fi2">🔒</div><div class="ft">纯学习，零干扰</div><div class="fd">没有社交、没有广告、没有无关内容。就是一个干净的英语练习空间。</div></div>
+  </div>
+</section>
+
+<section class="sec" style="background:#fff">
+  <h2 class="st">听听他们怎么说</h2><p class="ss">来自真实用户的反馈</p>
+  <div class="tml">
+    <div class="tc"><div class="tt">就一句话，它很符合脑科学：及时反馈让学习变成了有成就感的事。正反馈来了，就不存在"坚持"这回事。</div><div class="ta2"><div class="tav">袁</div><div><div class="tn2">袁雷雷</div><div class="tr">学习爱好者</div></div></div></div>
+    <div class="tc"><div class="tt">孩子每天只练10分钟，英语成绩稳定在全班第一。练了几个月，现在已经能和外教日常对话了。</div><div class="ta2"><div class="tav">陈</div><div><div class="tn2">陈妈妈</div><div class="tr">六年级家长</div></div></div></div>
+    <div class="tc"><div class="tt">学上瘾了，每天上班摸鱼玩一小时超级解压。比刷短视频有成就感多了。</div><div class="ta2"><div class="tav">李</div><div><div class="tn2">老李</div><div class="tr">职场人士</div></div></div></div>
+    <div class="tc"><div class="tt">用编辑器录入了课程内容，学生跟打游戏一样抢着练。后台直接看每个人的练习数据，跟家长沟通特别有底气。</div><div class="ta2"><div class="tav">刘</div><div><div class="tn2">刘老师</div><div class="tr">培训机构英语教师</div></div></div></div>
+    <div class="tc"><div class="tt">从零开始学英语，用句乐部练了半年，已经能在日常生活中简单交流了。80岁学英语也不是梦！</div><div class="ta2"><div class="tav">王</div><div><div class="tn2">王奖奇</div><div class="tr">80岁·退休人员</div></div></div></div>
+    <div class="tc"><div class="tt">编辑了毕业论文的摘要进去练，不仅记住了专业术语的拼写，连语感都好了很多。圆了留学梦。</div><div class="ta2"><div class="tav">阿</div><div><div class="tn2">大学生阿成</div><div class="tr">在校学生</div></div></div></div>
+  </div>
+</section>
+
+<section id="pricing" class="sec">
+  <h2 class="st">简单定价，放心开始</h2><p class="ss">先免费体验再决定，随时可取消</p>
+  <div class="pg">
+    <div class="pc"><div class="pn2">免费体验</div><div class="pa2">¥0</div><div class="pp2">30天免费</div><ul class="pf"><li>30天完整功能体验</li><li>100+ 内置课程包</li><li>每日30句练习额度</li><li>基础学习报告</li></ul><button class="pbtn out" onclick="startPractice()">免费开始</button></div>
+    <div class="pc feat"><div class="pbadge">最受欢迎</div><div class="pn2">年度会员</div><div class="pa2">¥199</div><div class="pp2">/年 · 每天不到6毛</div><ul class="pf"><li>全部课程无限畅练</li><li>AI 智能助手</li><li>自定义内容编辑器</li><li>详细学习数据报告</li><li>智能复习系统</li><li>优先客服支持</li></ul><button class="pbtn pri" onclick="startPractice()">立即开通</button></div>
+    <div class="pc"><div class="pn2">永久会员</div><div class="pa2">¥499</div><div class="pp2">一次付费，终身使用</div><ul class="pf"><li>年度会员的全部权益</li><li>终身有效，无需续费</li><li>永久会员专属标识</li><li>新功能优先体验</li></ul><button class="pbtn out" onclick="startPractice()">立即开通</button></div>
+  </div>
+</section>
+
+<section id="faq" class="sec" style="background:#fff">
+  <h2 class="st">常见问题</h2><div class="faq">
+    <div class="fqi"><div class="fqq" onclick="this.parentElement.classList.toggle('open')">和背单词 App 有什么不同？<span class="farrow">▼</span></div><div class="fqa">背单词解决的是"认识"，句乐部解决的是"会用"。你可能认识 apple 这个词，但能脱口而出 "An apple a day keeps the doctor away" 吗？句乐部从句子出发，把单词放回真实语境。</div></div>
+    <div class="fqi"><div class="fqq" onclick="this.parentElement.classList.toggle('open')">适合什么英语水平？<span class="farrow">▼</span></div><div class="fqa">小学生能用，中学生能用，考雅思托福也能用。句乐部支持初级、中级、高级三个难度级别。从最简单的主谓宾开始，高级直接挑战长难句。</div></div>
+    <div class="fqi"><div class="fqq" onclick="this.parentElement.classList.toggle('open')">内容够不够？<span class="farrow">▼</span></div><div class="fqa">1000+ 练习内容，覆盖 K12 课标、雅思托福、TED、电影片段等，内容持续更新。也可以用编辑器录入任何英语内容，自动生成练习题。</div></div>
+    <div class="fqi"><div class="fqq" onclick="this.parentElement.classList.toggle('open')">句乐部要花钱吗？<span class="farrow">▼</span></div><div class="fqa">注册即享30天免费体验，大部分课程包都有免费额度。觉得好用再开会员，不好用随时走人。</div></div>
+  </div>
+</section>
+
+<section class="cta"><h2>准备好开始了吗？</h2><p>像玩游戏一样学英语，试试就知道了。</p><button class="ctabtn" onclick="startPractice()">🎮 免费体验</button></section>
+
+<footer class="ftr"><div class="fg">
+  <div class="fc2"><h4>产品</h4><a href="#">文档</a><a href="#">学习资源</a><a href="#">更新日志</a></div>
+  <div class="fc2"><h4>团队</h4><a href="#">关于我们</a><a href="#">联系我们</a><a href="#">商务合作</a></div>
+  <div class="fc2"><h4>法律</h4><a href="#">服务条款</a><a href="#">隐私政策</a></div>
+</div><div class="fb">© 2026 句乐部 · 像玩游戏一样，用句子学英语</div></footer>
+
+<!-- ======= APP ======= -->
+<div class="ac" id="ac">
+  <!-- Top bar -->
+  <div class="atop">
+    <div class="atop-l">
+      <button class="aback" onclick="backToLanding()" title="返回">←</button>
+      <div class="atitle">🎯 句乐部</div>
+    </div>
+    <div class="atop-r">
+      <div class="atop-stat">练习 <b id="hToday">0</b></div>
+      <div class="atop-stat">正确率 <b id="hAcc">-</b></div>
+      <div class="atop-stat">积分 <b id="hScore">0</b></div>
+      <div class="atop-stat">连击 <b id="hCombo">0</b></div>
+      <button class="ap-act-btn" onclick="showModeModal()" style="font-size:12px;padding:6px 14px">切换模式</button>
+    </div>
+  </div>
+
+  <!-- Main layout -->
+  <div class="alayout">
+    <!-- Mobile toggle for left panel -->
+    <button class="ap-left-toggle" onclick="togglePanel('apLeft')" style="display:none">📋 句子列表 ▾</button>
+    <!-- Left: sentence list -->
+    <div class="ap-left" id="apLeft">
+      <div class="atabs2" id="leftTabs">
+        <button class="atab2 on" data-tab="list" onclick="switchLeftTab('list')">📋 句子列表</button>
+        <button class="atab2" data-tab="editor" onclick="switchLeftTab('editor')">✏️ 编辑器</button>
+      </div>
+      <div id="tabList">
+        <div class="ap-left-header">
+          <span class="ap-left-header-t" id="leftTitle">🌱 初级句子</span>
+          <span class="ap-left-count" id="leftCount">0 句</span>
+        </div>
+        <div class="ap-left-list" id="sentList"></div>
+      </div>
+      <div id="tabEditor" style="display:none">
+        <div class="editor-area2">
+          <div style="color:#94A3B8;font-size:12px">粘贴英文文本，自动拆成句子练习：</div>
+          <textarea class="editor-ta2" id="editorText" placeholder="例如：I love learning English. It opens doors to new opportunities."></textarea>
+          <button class="editor-btn2" onclick="processCustomText()">🔨 生成练习</button>
+          <div class="editor-preview2" id="editorPreview"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center: practice area -->
+    <div class="ap-center" id="apCenter">
+      <div class="ap-center-inner">
+        <div class="ap-mode-label" id="modeLabel">中译英模式</div>
+        <div class="ap-zh" id="apZh"></div>
+        <div class="ap-en-words" id="apWords"></div>
+        <div class="ap-input-w" id="inputWrapper">
+          <div class="ap-mirror" id="mirror"></div>
+          <input class="ap-input" id="pin" placeholder="在此输入英文，按 Enter 提交..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+        </div>
+        <div class="ap-fb" id="apFb"></div>
+        <div class="ap-combo" id="apCombo"></div>
+        <div class="ap-actions" id="apActions">
+          <button class="ap-act-btn" onclick="speakSentence()" title="Ctrl+P">🔊 发音</button>
+          <button class="ap-act-btn" onclick="markMastered()" title="Ctrl+M">✅ 掌握</button>
+          <button class="ap-act-btn" onclick="markNewWord()" title="Ctrl+N">📝 生词</button>
+          <button class="ap-act-btn pri" id="btnNext" onclick="goNext()" style="display:none">→ 下一题</button>
+        </div>
+        <div class="ap-shortcuts">
+          <span>Ctrl+Enter 提交</span><span>→ 下一题</span><span>Ctrl+P 发音</span><span>Ctrl+S 跳过</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile toggle for right panel -->
+    <button class="ap-right-toggle" onclick="togglePanel('apRight')" style="display:none">📖 知识点讲解 ▾</button>
+    <!-- Right: knowledge panel -->
+    <div class="ap-right" id="apRight">
+      <div class="ap-right-header">知识点讲解</div>
+      <div class="ap-right-body" id="kpBody">
+        <div class="kp-empty">👈 点击左侧句子或上方单词查看详细讲解</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mode select modal -->
+<div class="mo" id="modeModal">
+<div class="mod">
+  <h3>选择游戏模式</h3>
+  <div class="sub">选择一种练习方式开始学习</div>
+  <div class="m-mode-grid">
+    <div class="m-mode sel" data-mode="cn2en" onclick="selMode('cn2en')">
+      <div class="m-mode-icon">🀄</div>
+      <div class="m-mode-name">中译英模式</div>
+      <div class="m-mode-desc">看到中文提示，尝试用英文表达</div>
+    </div>
+    <div class="m-mode" data-mode="dictation" onclick="selMode('dictation')">
+      <div class="m-mode-icon">🎧</div>
+      <div class="m-mode-name">听写模式</div>
+      <div class="m-mode-desc">听音频，写出听到的英文</div>
+    </div>
+    <div class="m-mode" data-mode="listening" onclick="selMode('listening')">
+      <div class="m-mode-icon">👂</div>
+      <div class="m-mode-name">听力模式</div>
+      <div class="m-mode-desc">播放英语音频，沉浸语言环境</div>
+    </div>
+    <div class="m-mode" data-mode="speaking" onclick="selMode('speaking')">
+      <div class="m-mode-icon">🎤</div>
+      <div class="m-mode-name">口语模式</div>
+      <div class="m-mode-desc">看到中文提示，尝试用口语表达</div>
+    </div>
+  </div>
+  <div style="margin-top:24px">
+    <button class="mbtn pri" onclick="startWithMode()">开始练习</button>
+    <button class="mbtn sec" onclick="closeModeModal()">取消</button>
+  </div>
+</div></div>
+
+<!-- Completion modal -->
+<div class="mo" id="compModal">
+<div class="mod">
+  <div id="modalGrade" class="grade s">S</div>
+  <h3 id="modalTitle">完美通关！</h3>
+  <div class="mstats2">
+    <div class="mst2"><div class="mstv" id="modalAcc">100%</div><div class="mstl">正确率</div></div>
+    <div class="mst2"><div class="mstv" id="modalScore">500</div><div class="mstl">获得积分</div></div>
+    <div class="mst2"><div class="mstv" id="modalCombo">5</div><div class="mstl">最高连击</div></div>
+  </div>
+  <button class="mbtn pri" onclick="restartLevel()">再来一次</button>
+  <button class="mbtn sec" onclick="showModeModal()">换模式</button>
+  <button class="mbtn sec" onclick="backToLanding()">返回首页</button>
+</div></div>
+
+<script>
+// ======= DICTIONARY =======
+const WD={};
+(function buildDict(){
+  const raw=[
+    ['i','/aɪ/','pron','我',['me'],['you'],'I am a student.','第一人称，永远大写'],
+    ['like','/laɪk/','v','喜欢',['enjoy','love'],['dislike','hate'],'I like to read books.','和 like 做介词"像"区分'],
+    ['apples','/ˈæp.əlz/','n','苹果',['fruit'],['-'],'She eats two apples a day.','复数加 s，单数是 apple'],
+    ['she','/ʃiː/','pron','她',['her'],['he'],'She is my sister.','女性第三人称单数'],
+    ['is','/ɪz/','v','是',['be','am','are'],['is not'],'He is a teacher.','be 动词第三人称单数'],
+    ['good','/ɡʊd/','adj','好的',['nice','great'],['bad','poor'],'This is a good idea.','最常用形容词之一'],
+    ['student','/ˈstjuː.dənt/','n','学生',['learner','pupil'],['teacher'],'She is a top student.','可指任何层级的学生'],
+    ['he','/hiː/','pron','他',['him'],['she'],'He walks to school.','男性第三人称单数'],
+    ['walks','/wɔːks/','v','走路',['strolls','strides'],['runs'],'He walks every day.','第三人称单数加 s'],
+    ['school','/skuːl/','n','学校',['academy','institute'],['-'],'I go to school by bus.','各类学校统称'],
+    ['every','/ˈev.ri/','det','每个',['each','all'],['none'],'Every student passed.','限定词，后接单数名词'],
+    ['day','/deɪ/','n','天',['date'],['night'],'Have a nice day.','既可指白天也可指一整天'],
+    ['we','/wiː/','pron','我们',['us'],['they'],'We are friends.','第一人称复数'],
+    ['have','/hæv/','v','有',['own','possess'],['lack'],'I have a big house.','拥有；也可作助动词'],
+    ['big','/bɪɡ/','adj','大的',['large','huge'],['small','tiny'],'They have a big garden.','口语最常用'],
+    ['house','/haʊs/','n','房子',['home','residence'],['-'],'We live in a big house.','建筑物；home 更强调家的感觉'],
+    ['this','/ðɪs/','det','这个',['-'],['that'],'This book is mine.','近指；that 远指'],
+    ['book','/bʊk/','n','书',['volume','novel'],['-'],'I am reading a book.','最基础的读物'],
+    ['very','/ˈver.i/','adv','非常',['extremely','really'],['slightly'],'She is very happy.','常用程度副词'],
+    ['interesting','/ˈɪn.tres.tɪŋ/','adj','有趣的',['fascinating','engaging'],['boring','dull'],'That is an interesting story.','形容事物让人感兴趣'],
+    ['they','/ðeɪ/','pron','他们',['them'],['we'],'They are my friends.','第三人称复数'],
+    ['my','/maɪ/','det','我的',['mine'],['your'],'My name is Tom.','形容词性物主代词'],
+    ['best','/best/','adj','最好的',['finest','greatest'],['worst'],'You are the best.','good 最高级'],
+    ['friends','/frendz/','n','朋友',['buddies','pals'],['enemies'],'We are best friends.','复数，单数 friend'],
+    ['want','/wɒnt/','v','想要',['desire','wish'],['refuse'],'I want a cup of tea.','比 would like 更直接'],
+    ['glass','/ɡlæs/','n','杯子',['cup','tumbler'],['-'],'A glass of water, please.','也可指"玻璃"'],
+    ['water','/ˈwɔː.tər/','n','水',['H2O'],['-'],'Drink more water.','不可数名词'],
+    ['cat','/kæt/','n','猫',['feline','kitty'],['-'],'The cat is sleeping.','常见宠物'],
+    ['under','/ˈʌn.dər/','prep','在...下面',['beneath','below'],['above','over'],'The cat is under the table.','空间位置介词'],
+    ['table','/ˈteɪ.bəl/','n','桌子',['desk'],['-'],'Put it on the table.','家具；也可指"表格"'],
+    ['what','/wɒt/','pron','什么',['-'],['-'],'What is your name?','疑问代词'],
+    ['color','/ˈkʌl.ər/','n','颜色',['hue','shade'],['-'],'What color do you like?','英式 colour,美式 color'],
+    ['do','/duː/','v','做',['perform','execute'],['-'],'What do you do?','助动词，也可做实义动词'],
+    ['you','/juː/','pron','你',['-'],['I'],'How are you?','单复数同形'],
+    ['today','/təˈdeɪ/','adv','今天',['now'],['tomorrow','yesterday'],'Today is Monday.','可作名词或副词'],
+    ['monday','/ˈmʌn.deɪ/','n','星期一',['-'],['-'],'See you on Monday.','星期首字母大写'],
+    ['go','/ɡəʊ/','v','去',['leave','depart'],['come','arrive'],'Let us go to the park.','最常用动词之一'],
+    ['park','/pɑːrk/','n','公园',['garden','playground'],['-'],'We went to the park.','也可作动词"停车"'],
+    ['sing','/sɪŋ/','v','唱歌',['chant','croon'],['-'],'She sings beautifully.','不规则动词：sing-sang-sung'],
+    ['well','/wel/','adv','好地',['skilfully','nicely'],['badly','poorly'],'She sings very well.','副词；形容词是 good'],
+    ['morning','/ˈmɔː.nɪŋ/','n','早上',['dawn','sunrise'],['evening','night'],'Good morning!','打招呼常用'],
+    ['beautiful','/ˈbjuː.tɪ.fəl/','adj','美丽的',['pretty','gorgeous'],['ugly'],'What a beautiful view!','形容外表或风景'],
+    ['city','/ˈsɪt.i/','n','城市',['town','metropolis'],['countryside','village'],'Beijing is a big city.','比 town 大'],
+    ['please','/pliːz/','adv','请',['kindly'],['-'],'Please sit down.','礼貌用词'],
+    ['open','/ˈəʊ.pən/','v','打开',['unlock','unfold'],['close','shut'],'Open your book please.','也可作形容词"开着的"'],
+    ['tall','/tɔːl/','adj','高的',['high'],['short'],'He is very tall.','形容人/物高度；high 偏抽象'],
+    ['help','/help/','v','帮助',['assist','aid'],['hinder'],'Can you help me?','常用；也可作名词'],
+    ['read','/riːd/','v','阅读',['scan','study'],['-'],'I like to read.','不规则：read-read-read (/red/)'],
+    ['weekend','/ˌwiːkˈend/','n','周末',['Saturday'],['weekday'],'Have a nice weekend!','周六日'],
+    ['photo','/ˈfəʊ.təʊ/','n','照片',['picture','image'],['-'],'This is a photo of my family.','photograph 的缩写'],
+    ['family','/ˈfæm.əl.i/','n','家庭',['relatives','clan'],['-'],'I love my family.','可指核心家庭或大家族'],
+    ['coffee','/ˈkɒf.i/','n','咖啡',['espresso','latte'],['tea'],'I need a coffee.','饮品；不可数但可点单用 a coffee'],
+    ['not','/nɒt/','adv','不',['no'],['yes'],'I am not tired.','否定词，用于构成否定句'],
+    ['only','/ˈəʊn.li/','adv','仅仅',['just','merely'],['also'],'She is not only smart.','not only... but also 搭配'],
+    ['smart','/smɑːrt/','adj','聪明的',['clever','intelligent'],['stupid','dumb'],'He is a smart boy.','口语常用'],
+    ['also','/ˈɔːl.səʊ/','adv','也',['too','as well'],['neither'],'She is also kind.','放在句中'],
+    ['hardworking','/ˌhɑːrdˈwɜː.kɪŋ/','adj','勤奋的',['diligent','industrious'],['lazy','idle'],'He is a hardworking student.','复合词 hard+working'],
+    ['question','/ˈkwes.tʃən/','n','问题',['query','inquiry'],['answer','reply'],'Do you have any questions?','可数名词'],
+    ['ask','/æsk/','v','问',['inquire','query'],['answer','reply'],'Feel free to ask me.','常用动词'],
+    ['most','/məʊst/','adv','最',['-'],['least'],'It is the most interesting book.','many/much 最高级'],
+    ['ever','/ˈev.ər/','adv','曾经',['at any time'],['never'],'Have you ever been to Paris?','用于疑问句和否定句'],
+    ['protect','/prəˈtekt/','v','保护',['defend','guard'],['harm','endanger'],'Protect the environment.','及物动词'],
+    ['environment','/ɪnˈvaɪ.rən.mənt/','n','环境',['nature','surroundings'],['-'],'We should protect the environment.','常用搭配 protect the environment'],
+    ['next','/nekst/','adj','下一个',['following','upcoming'],['previous','last'],'Next generation.','可作形容词或副词'],
+    ['generation','/ˌdʒen.əˈreɪ.ʃən/','n','一代',['cohort','age'],['-'],'The younger generation.','generation gap 代沟'],
+    ['although','/ɔːlˈðəʊ/','conj','尽管',['though','even though'],['because','since'],'Although it rained, we went.','引导让步状语从句'],
+    ['rain','/reɪn/','v','下雨',['pour','drizzle'],['-'],'It is raining outside.','也可作名词"雨"'],
+    ['continue','/kənˈtɪn.juː/','v','继续',['go on','proceed'],['stop','quit'],'We continued our trip.','常用动词'],
+    ['trip','/trɪp/','n','旅行',['journey','tour'],['-'],'Have a nice trip!','短途旅行；travel 为统称'],
+    ['learning','/ˈlɜː.nɪŋ/','n','学习',['studying','education'],['-'],'Learning English takes time.','动名词作主语'],
+    ['english','/ˈɪŋ.ɡlɪʃ/','n','英语',['-'],['-'],'I am learning English.','语言名，首字母大写'],
+    ['requires','/rɪˈkwaɪəz/','v','需要',['needs','demands'],['-'],'It requires patience.','第三人称单数，原形 require'],
+    ['practice','/ˈpræk.tɪs/','n','练习',['training','drill'],['theory'],'Practice makes perfect.','名词；动词是 practise(英)/practice(美)'],
+    ['patience','/ˈpeɪ.ʃəns/','n','耐心',['tolerance','endurance'],['impatience'],'You need patience.','不可数名词'],
+    ['tired','/taɪəd/','adj','累的',['exhausted','weary'],['energetic','fresh'],'I am so tired.','过去分词作形容词'],
+    ['technology','/tekˈnɒl.ə.dʒi/','n','科技',['tech','innovation'],['-'],'Technology changes fast.','可数/不可数均可'],
+    ['changed','/tʃeɪndʒd/','v','改变了',['altered','transformed'],['remained','kept'],'It has changed my life.','过去分词，原形 change'],
+    ['live','/lɪv/','v','生活',['reside','dwell'],['die'],'We live in Beijing.','读音与名词 life 不同'],
+    ['since','/sɪns/','prep','自从',['from','after'],['until'],'Since last year.','可作介词、连词、副词'],
+    ['moved','/muːvd/','v','搬家',['relocated','shifted'],['stayed','remained'],'She moved to Beijing.','过去式，原形 move'],
+    ['problem','/ˈprɒb.ləm/','n','问题',['issue','trouble'],['solution','answer'],'No problem!','需解决的事情；question 是提问'],
+    ['much','/mʌtʃ/','adv','更',['far','a lot'],['little'],'Much more complicated.','修饰比较级；也可修饰不可数名词'],
+    ['complicated','/ˈkɒm.plɪ.keɪ.tɪd/','adj','复杂的',['complex','intricate'],['simple','easy'],'A complicated problem.','比 difficult 更重'],
+    ['than','/ðæn/','conj','比',['compared to'],['-'],'Better than before.','用于比较级'],
+    ['thought','/θɔːt/','v','认为',['believed','assumed'],['-'],'I thought so.','think 的过去式；也作名词"想法"'],
+    ['looking','/ˈlʊk.ɪŋ/','v','期待',['anticipating','awaiting'],['-'],'Looking forward to seeing you.','look forward to + doing'],
+    ['forward','/ˈfɔː.wəd/','adv','向前',['ahead','onward'],['backward'],'Move forward.','forward/backward'],
+    ['hearing','/ˈhɪə.rɪŋ/','v','听到',['listening'],['-'],'I look forward to hearing from you.','hear from sb 收到某人消息'],
+    ['whatever','/wɒtˈev.ər/','pron','无论什么',['no matter what'],['-'],'Whatever you decide, I support you.','让步；也可作"随便"'],
+    ['decision','/dɪˈsɪʒ.ən/','n','决定',['choice','resolution'],['indecision'],'Make a decision.','动词是 decide'],
+    ['support','/səˈpɔːrt/','v','支持',['back','assist'],['oppose'],'I will support you.','及物动词；也作名词'],
+    ['habit','/ˈhæb.ɪt/','n','习惯',['routine','custom'],['-'],'Good habits matter.','break a habit 改掉习惯'],
+    ['twenty','/ˈtwen.ti/','num','二十',['-'],['-'],'Twenty-one days.','数字'],
+    ['form','/fɔːrm/','v','形成',['create','shape'],['destroy'],'Form a good habit.','也可作名词"表格/形式"'],
+    ['traveling','/ˈtræv.əl.ɪŋ/','n','旅行',['journeying','touring'],['-'],'Traveling broadens the mind.','也可拼作 travelling(英)'],
+    ['education','/ˌedʒ.uˈkeɪ.ʃən/','n','教育',['schooling','teaching'],['ignorance'],'Education is important.','不可数'],
+    ['complete','/kəmˈpliːt/','v','完成',['finish','accomplish'],['start','begin'],'Complete the task.','也可作形容词"完整的"'],
+    ['task','/tæsk/','n','任务',['assignment','job'],['-'],'Finish your tasks first.','比 job 更具体'],
+    ['deadline','/ˈded.laɪn/','n','截止日期',['due date'],['-'],'Meet the deadline.','常用商务词汇'],
+    ['concert','/ˈkɒn.sərt/','n','音乐会',['performance','show'],['-'],'The concert was amazing.','现场音乐演出'],
+    ['canceled','/ˈkæn.səld/','v','取消',['called off','scrapped'],['confirmed','scheduled'],'It was canceled due to rain.','也可拼 cancelled(英)'],
+    ['due','/djuː/','adj','由于',['because of','owing to'],['-'],'Due to the weather.','due to = because of'],
+    ['weather','/ˈweð.ər/','n','天气',['climate'],['-'],'The weather is nice.','不可数'],
+    ['first','/fɜːrst/','adv','第一次',['-'],['last'],'My first time here.','序数词；one → first'],
+    ['time','/taɪm/','n','次',['occasion'],['-'],'This is my first time.','也可指"时间"'],
+    ['china','/ˈtʃaɪ.nə/','n','中国',['-'],['-'],'I love China.','国名首字母大写；c小写是"瓷器"'],
+    ['words','/wɜːrdz/','n','话',['remarks','speech'],['-'],'His words made me think.','复数形式，单数 word'],
+    ['rethink','/ˌriːˈθɪŋk/','v','重新思考',['reconsider','reevaluate'],['-'],'I need to rethink this.','re+think，重新思考'],
+    ['issue','/ˈɪʃ.uː/','n','问题',['matter','concern'],['-'],'That is a serious issue.','比 problem 更正式'],
+    ['denying','/dɪˈnaɪ.ɪŋ/','v','否认',['refuting','negating'],['admitting','acknowledging'],'There is no denying that...','deny 的动名词'],
+    ['artificial','/ˌɑːr.tɪˈfɪʃ.əl/','adj','人工的',['synthetic','man-made'],['natural','genuine'],'Artificial intelligence.','注意与 artistic 区别'],
+    ['intelligence','/ɪnˈtel.ɪ.dʒəns/','n','智能',['intellect','wit'],['stupidity'],'Artificial intelligence AI.','缩写 AI'],
+    ['revolutionize','/ˌrev.əˈluː.ʃən.aɪz/','v','彻底改变',['transform','overhaul'],['preserve'],'AI will revolutionize the world.','大词，表示根本性变革'],
+    ['job','/dʒɒb/','n','工作',['occupation','career'],['-'],'Find a good job.','可数名词；work 不可数'],
+    ['market','/ˈmɑːr.kɪt/','n','市场',['marketplace','bazaar'],['-'],'The job market is competitive.','job market 就业市场'],
+    ['decade','/ˈdek.eɪd/','n','十年',['-'],['-'],'The next decade.','十年为一个 decade'],
+    ['despite','/dɪˈspaɪt/','prep','尽管',['in spite of','notwithstanding'],['because of'],'Despite the challenges.','后面接名词/动名词'],
+    ['numerous','/ˈnjuː.mər.əs/','adj','许多的',['many','countless'],['few','scarce'],'Numerous challenges.','比 many 更正式'],
+    ['challenges','/ˈtʃæl.ɪn.dʒɪz/','n','挑战',['difficulties','obstacles'],['advantages','aids'],'Face challenges.','名词复数；也可作动词'],
+    ['researchers','/rɪˈsɜː.tʃəz/','n','研究人员',['scientists','scholars'],['-'],'The researchers found that...','复数；单数 researcher'],
+    ['remain','/rɪˈmeɪn/','v','保持',['stay','continue'],['change'],'It remains a mystery.','系动词，后接形容词'],
+    ['confident','/ˈkɒn.fɪ.dənt/','adj','有信心的',['sure','certain'],['doubtful','uncertain'],'I am confident about the future.','名词 confidence'],
+    ['finding','/ˈfaɪn.dɪŋ/','n','发现',['discovery','result'],['-'],'Important findings.','常用复数；动词 find'],
+    ['sustainable','/səˈsteɪ.nə.bəl/','adj','可持续的',['green','eco-friendly'],['unsustainable'],'Sustainable development.','环保语境常用'],
+    ['solutions','/səˈluː.ʃənz/','n','解决方案',['answers','fixes'],['problems'],'Find solutions.','solve 的名词形式'],
+    ['discovery','/dɪˈskʌv.ər.i/','n','发现',['finding','breakthrough'],['-'],'A major discovery.','动词 discover'],
+    ['challenge','/ˈtʃæl.ɪndʒ/','v','挑战',['defy','question'],['accept','embrace'],'Challenge the theory.','既是名词也是动词'],
+    ['conventional','/kənˈven.ʃən.əl/','adj','传统的',['traditional','standard'],['unconventional','innovative'],'Conventional wisdom.','比 traditional 更书面'],
+    ['theories','/ˈθɪə.riz/','n','理论',['hypotheses','concepts'],['facts','practice'],'Various theories.','复数；单数 theory'],
+    ['directions','/dɪˈrek.ʃənz/','n','方向',['paths','ways'],['-'],'New directions for research.','也可指"指路说明"'],
+    ['government','/ˈɡʌv.ərn.mənt/','n','政府',['authorities','state'],['-'],'The government should act.','集合名词；可接单数或复数动词'],
+    ['measures','/ˈmeʒ.ərz/','n','措施',['actions','steps'],['-'],'Take measures.','复数；单数 measure'],
+    ['implemented','/ˈɪm.plɪ.men.tɪd/','v','实施',['carried out','executed'],['abandoned'],'The policy was implemented.','过去分词'],
+    ['reducing','/rɪˈdjuː.sɪŋ/','v','减少',['cutting','lowering'],['increasing','raising'],'Reducing carbon emissions.','reduce 的动名词'],
+    ['carbon','/ˈkɑːr.bən/','n','碳',['-'],['-'],'Carbon dioxide.','元素 C'],
+    ['emissions','/ɪˈmɪʃ.ənz/','n','排放',['discharge','release'],['-'],'Reduce emissions.','常用复数'],
+    ['concept','/ˈkɒn.sept/','n','概念',['idea','notion'],['-'],'A complex concept.','抽象概念'],
+    ['explain','/ɪkˈspleɪn/','v','解释',['clarify','describe'],['confuse'],'Can you explain this?','及物动词'],
+    ['probably','/ˈprɒb.ə.bli/','adv','大概',['likely','possibly'],['certainly','definitely'],'You probably know this.','比 maybe 把握更大'],
+    ['fully','/ˈfʊl.i/','adv','完全地',['completely','entirely'],['partially','hardly'],'I fully understand.','full+ly'],
+    ['diversity','/daɪˈvɜː.sə.ti/','n','多样性',['variety','range'],['uniformity','sameness'],'Cultural diversity.','形容词 diverse'],
+    ['cultural','/ˈkʌl.tʃər.əl/','adj','文化的',['-'],['-'],'Cultural differences.','名词 culture'],
+    ['obstacle','/ˈɒb.stə.kəl/','n','障碍',['barrier','hurdle'],['advantage','aid'],'Overcome obstacles.','overcome obstacles 克服障碍'],
+    ['embraced','/ɪmˈbreɪst/','v','拥抱',['welcomed','accepted'],['rejected','refused'],'It should be embraced.','过去分词；原形 embrace'],
+    ['valuable','/ˈvæl.ju.ə.bəl/','adj','宝贵的',['precious','priceless'],['worthless'],'Valuable experience.','名词 value'],
+    ['resource','/rɪˈzɔːrs/','n','资源',['asset','material'],['-'],'Natural resources.','常用复数'],
+    ['success','/səkˈses/','n','成功',['achievement','triumph'],['failure'],'The key to success.','动词 succeed，形容词 successful'],
+    ['key','/kiː/','n','关键',['answer','solution'],['-'],'The key to success.','也可指"钥匙"'],
+    ['lies','/laɪz/','v','在于',['exists','rests'],['-'],'The answer lies in...','此处不是"说谎"的意思'],
+    ['possess','/pəˈzes/','v','拥有',['own','have'],['lack'],'What you possess.','比 have 正式'],
+    ['resourceful','/rɪˈzɔːrs.fəl/','adj','善于利用资源的',['creative','inventive'],['unimaginative'],'Be resourceful.','resource+ful'],
+    ['research','/rɪˈsɜːrtʃ/','n','研究',['study','investigation'],['-'],'Research shows that...','不可数名词'],
+    ['indicates','/ˈɪn.dɪ.keɪts/','v','表明',['shows','suggests'],['hides'],'Research indicates...','第三人称单数'],
+    ['regular','/ˈreɡ.jə.lər/','adj','定期的',['routine','frequent'],['irregular','occasional'],'Regular exercise.','regularly 副词'],
+    ['physical','/ˈfɪz.ɪ.kəl/','adj','身体的',['bodily'],['mental','psychological'],'Physical health.','与 mental 对应'],
+    ['exercise','/ˈek.sər.saɪz/','n','锻炼',['workout','training'],['inactivity'],'Physical exercise.','也可作动词；不可数'],
+    ['health','/helθ/','n','健康',['well-being','fitness'],['illness','sickness'],'Health is wealth.','healthy 形容词'],
+    ['significantly','/sɪɡˈnɪf.ɪ.kənt.li/','adv','显著地',['notably','markedly'],['slightly'],'It significantly improved.','形容词 significant'],
+    ['enhances','/ɪnˈhæn.sɪz/','v','提高',['improves','boosts'],['diminishes','impairs'],'It enhances performance.','enhance 第三人称单数'],
+    ['cognitive','/ˈkɒɡ.nə.tɪv/','adj','认知的',['mental','intellectual'],['-'],'Cognitive ability.','专业词汇'],
+    ['performance','/pərˈfɔːr.məns/','n','表现',['output','achievement'],['-'],'Academic performance.','名词；动词 perform'],
+  ];
+  for(const[w,ph,ps,zh,sy,an,ex,tp] of raw){
+    WD[w]=WD[w]||{w,ph,ps,zh,sy:[],an:[],ex,tp};
+    WD[w].sy.push(...(sy||[]).filter(s=>s!=='-'&&!WD[w].sy.includes(s)));
+    WD[w].an.push(...(an||[]).filter(s=>s!=='-'&&!WD[w].an.includes(s)));
+  }
+  // Quick lookup also by lowercase
+  for(const k of Object.keys(WD)){
+    WD[k.toLowerCase()]=WD[k];
+  }
+})();
+
+// ======= SENTENCE DATABASE =======
+const DB={
+  beginner:[{zh:'我喜欢苹果。',en:'I like apples.'},{zh:'她是一个好学生。',en:'She is a good student.'},{zh:'他每天走路去上学。',en:'He walks to school every day.'},{zh:'我们有一个大房子。',en:'We have a big house.'},{zh:'这本书很有趣。',en:'This book is very interesting.'},{zh:'他们是我最好的朋友。',en:'They are my best friends.'},{zh:'我想喝一杯水。',en:'I want a glass of water.'},{zh:'那只猫在桌子下面。',en:'The cat is under the table.'},{zh:'你喜欢什么颜色？',en:'What color do you like?'},{zh:'今天是星期一。',en:'Today is Monday.'},{zh:'我们去公园玩吧。',en:"Let's go to the park."},{zh:'她唱歌很好听。',en:'She sings very well.'},{zh:'我每天早上六点起床。',en:'I get up at six every morning.'},{zh:'那是一个美丽的城市。',en:'That is a beautiful city.'},{zh:'请打开你的书。',en:'Please open your book.'},{zh:'他很高。',en:'He is very tall.'},{zh:'你能帮我吗？',en:'Can you help me?'},{zh:'我喜欢在周末读书。',en:'I like to read books on weekends.'},{zh:'这是一张我家的照片。',en:'This is a photo of my family.'},{zh:'她每天早上喝咖啡。',en:'She drinks coffee every morning.'}],
+  intermediate:[{zh:'她不仅聪明而且非常勤奋。',en:'She is not only smart but also very hardworking.'},{zh:'如果你有问题请随时问我。',en:'If you have any questions, please feel free to ask me.'},{zh:'这是我读过的最有趣的书之一。',en:'This is one of the most interesting books I have ever read.'},{zh:'我们应该保护环境。',en:'We should protect the environment.'},{zh:'尽管下雨了，我们继续了旅行。',en:'Although it was raining, we continued our trip.'},{zh:'学好英语需要大量的练习和耐心。',en:'Learning English well requires a lot of practice and patience.'},{zh:'他太累了以至于在公交车上睡着了。',en:'He was so tired that he fell asleep on the bus.'},{zh:'科技已经改变了我们的生活方式。',en:'Technology has changed the way we live.'},{zh:'她自从搬到北京后就一直住在这里。',en:'She has been living here since she moved to Beijing.'},{zh:'这个问题比我们想象的要复杂得多。',en:'This problem is much more complicated than we thought.'},{zh:'我期待着收到你的回信。',en:'I am looking forward to hearing from you.'},{zh:'不管你做什么决定我都会支持你。',en:'Whatever decision you make, I will support you.'},{zh:'养成一个好习惯需要二十一天。',en:'It takes twenty-one days to form a good habit.'},{zh:'旅行是最好的教育方式之一。',en:'Traveling is one of the best forms of education.'},{zh:'你应该在截止日期之前完成任务。',en:'You should complete the task before the deadline.'},{zh:'音乐会因为天气原因被取消了。',en:'The concert was canceled due to the weather.'},{zh:'这是我第一次来中国。',en:'This is my first time visiting China.'},{zh:'他的话让我重新思考了这个问题。',en:'His words made me rethink the issue.'}],
+  advanced:[{zh:'不可否认，人工智能将在未来十年彻底改变就业市场。',en:'There is no denying that artificial intelligence will revolutionize the job market within the next decade.'},{zh:'尽管面临诸多挑战，研究人员仍然对找到可持续的解决方案充满信心。',en:'Despite numerous challenges, researchers remain confident about finding sustainable solutions.'},{zh:'这一发现不仅挑战了传统理论，还为未来研究开辟了全新方向。',en:'Not only does this discovery challenge conventional theories, but it also opens up new directions for future research.'},{zh:'政府实施的措施在减少碳排放方面取得了显著成效。',en:'The measures implemented by the government have yielded remarkable results in reducing carbon emissions.'},{zh:'文化多样性不应该被视为障碍，而应该被视为宝贵的资源。',en:'Cultural diversity should not be seen as an obstacle but rather embraced as a valuable resource.'},{zh:'成功的关键不在于你拥有多少资源，而在于你如何利用你所拥有的。',en:'The key to success lies not in how many resources you possess but in how resourceful you are with what you have.'},{zh:'研究表明，定期体育锻炼不仅有益身体健康，还能显著提高认知能力。',en:'Research indicates that engaging in regular physical exercise not only benefits physical health but also significantly enhances cognitive performance.'}],
+  review:[],custom:[]
+};
+
+// ======= STATE =======
+let S={mode:'cn2en',level:'beginner',idx:0,sentences:[],score:0,combo:0,maxCombo:0,correct:0,attempts:0,todaySentences:0,streak:0,levelProgress:{beginner:0,intermediate:0,advanced:0},reviewQueue:[],incorrectSentences:[],sentenceStatus:{}};
+
+function loadData(){try{const d=JSON.parse(localStorage.getItem('ep_data')||'{}');if(d.todayDate===new Date().toDateString())S.todaySentences=d.todaySentences||0;else S.todaySentences=0;S.levelProgress=d.levelProgress||{beginner:0,intermediate:0,advanced:0};S.streak=d.streak||0;S.reviewQueue=d.reviewQueue||[];S.incorrectSentences=d.incorrectSentences||[]}catch(e){S.todaySentences=0;S.levelProgress={beginner:0,intermediate:0,advanced:0};S.streak=0;S.reviewQueue=[];S.incorrectSentences=[]}}
+function saveData(){localStorage.setItem('ep_data',JSON.stringify({todayDate:new Date().toDateString(),todaySentences:S.todaySentences,levelProgress:S.levelProgress,streak:S.streak,reviewQueue:S.reviewQueue,incorrectSentences:S.incorrectSentences}))}
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+
+// ======= DOM refs =======
+const $=(id)=>document.getElementById(id);
+const pin=$('pin'),mirror=$('mirror'),apInputW=$('inputWrapper');
+
+// ======= APP NAVIGATION =======
+function startPractice(){showLanding(false);$('ac').classList.add('on');loadData();S.level='beginner';S.mode='cn2en';switchLeftTab('list');resetRound();showModeModal()}
+function backToLanding(){$('ac').classList.remove('on');showLanding(true);$('modeModal').classList.remove('show');$('compModal').classList.remove('show')}
+function showLanding(v){const d=v?'':'none';document.querySelector('.nav').style.display=d;document.querySelectorAll('body>section,body>footer').forEach(e=>e.style.display=d);if(!v)document.querySelector('.nav').style.display='none'}
+
+function switchLeftTab(tab){document.querySelectorAll('.atab2').forEach(e=>e.classList.toggle('on',e.dataset.tab===tab));$('tabList').style.display=tab==='list'?'':'none';$('tabEditor').style.display=tab==='editor'?'':'none'}
+function togglePanel(id){$(id).classList.toggle('open')}
+function resetRound(){S.score=0;S.combo=0;S.maxCombo=0;S.correct=0;S.attempts=0;S.idx=0;S.sentenceStatus={}}
+
+// ======= MODE SELECT =======
+let pendingMode='cn2en';
+function showModeModal(){pendingMode=S.mode;$('modeModal').classList.add('show');selMode(pendingMode)}
+function closeModeModal(){$('modeModal').classList.remove('show')}
+function selMode(mode){pendingMode=mode;document.querySelectorAll('.m-mode').forEach(e=>e.classList.toggle('sel',e.dataset.mode===mode))}
+function startWithMode(){S.mode=pendingMode;closeModeModal();startLevel()}
+
+// ======= LEVEL SYSTEM =======
+function switchLevel(lv){S.level=lv;resetRound();startLevel()}
+function startLevel(){
+  let src;
+  if(S.level==='review'){src=[...S.reviewQueue];if(src.length===0){alert('没有需要复习的错题！');switchLevel('beginner');return}}
+  else if(S.level==='custom'){src=DB.custom}
+  else{src=DB[S.level]}
+  S.sentences=shuffle(src).slice(0,Math.min(src.length,10));S.idx=0;resetRound();
+  buildSentList();jumpTo(0);
+  $('compModal').classList.remove('show');
+}
+
+// ======= SENTENCE LIST =======
+function buildSentList(){
+  const labels={beginner:'🌱 初级',intermediate:'🌿 中级',advanced:'🌳 高级',review:'🔄 错题复习',custom:'✏️ 自定义'};
+  $('leftTitle').textContent=(labels[S.level]||'句子列表')+' 句子列表';
+  $('leftCount').textContent=S.sentences.length+' 句';
+  let html='';
+  S.sentences.forEach((s,i)=>{
+    const st=S.sentenceStatus[i]||'pending';
+    const dotCls={ok:'ok',wrong:'wrong',pending:'pending'}[st]||'pending';
+    const isOn=i===S.idx;
+    html+=`<div class="ap-sent${isOn?' on':''}" data-i="${i}" onclick="jumpTo(${i})">
+      <span class="ap-sent-idx">${i+1}</span>
+      <span class="ap-sent-text">${s.zh.slice(0,20)}${s.zh.length>20?'...':''}</span>
+      <span class="ap-sent-dot ${dotCls}"></span>
+    </div>`;
+  });
+  $('sentList').innerHTML=html;
+  // Levels tabs in left panel (simple level switcher)
+  const hasReview=S.reviewQueue.length>0;
+}
+
+function jumpTo(i){S.idx=i;refreshSentListHighlight();showSentence()}
+function refreshSentListHighlight(){document.querySelectorAll('.ap-sent').forEach(e=>e.classList.toggle('on',parseInt(e.dataset.i)===S.idx))}
+
+// ======= SENTENCE DISPLAY =======
+function showSentence(){
+  const s=S.sentences[S.idx];if(!s)return;
+  const modeLabels={cn2en:'中译英模式',dictation:'听写模式',listening:'听力模式',speaking:'口语模式'};
+  $('modeLabel').textContent=modeLabels[S.mode]||'练习模式';
+
+  if(S.mode==='cn2en'||S.mode==='speaking'){$('apZh').style.display='';$('apZh').textContent=s.zh}
+  else{$('apZh').textContent=''}
+
+  // Hide word annotations until correct answer
+  $('apWords').innerHTML='<span style="color:#475569;font-size:14px">🔒 正确输入后将显示逐词注解</span>';
+  $('kpBody').innerHTML='<div class="kp-empty">🔒 答对后显示知识点讲解</div>';
+
+  // Input
+  pin.value='';mirror.innerHTML='';
+  pin.disabled=false;
+  $('apFb').textContent='';$('apCombo').textContent='';
+  $('btnNext').style.display='none';
+  pin.focus();
+  refreshSentListHighlight();
+  updateTopBar();
+}
+
+function revealSentence(){
+  const s=S.sentences[S.idx];if(!s)return;
+  const words=s.en.replace(/[^a-zA-Z0-9'’\s]/g,'').split(/\s+/).filter(w=>w);
+  let whtml='';
+  for(const w of words){
+    const lw=w.toLowerCase();
+    const info=WD[lw];
+    let cls='ot';
+    if(info){
+      const m={pron:'pn',v:'vb',adj:'aj',n:'nn',adv:'av',det:'dt',prep:'pr',conj:'ot',num:'ot',int:'ot'};
+      cls=m[info.ps]||'ot';
+    }
+    whtml+=`<span class="ap-word ${cls}" data-word="${lw}" onclick="showWordDetail('${lw}')" title="点击查看详解">${w}</span>`;
+  }
+  $('apWords').innerHTML=whtml;
+  // Show first word detail
+  if(words.length>0){showWordDetail(words[0].toLowerCase())}
+}
+
+// ======= WORD DETAIL PANEL =======
+function showWordDetail(w){
+  const info=WD[w];
+  if(!info){$('kpBody').innerHTML=`<div class="kp-empty">⚠️ 词库暂未收录 "${w}"<br>后续版本将自动联网查询</div>`;return}
+  const posClass={pron:'pn',v:'vb',adj:'aj',n:'nn',adv:'av',det:'dt',prep:'pr',conj:'ot',num:'ot',int:'ot'};
+  const cls=posClass[info.ps]||'ot';
+  const posLabel={pron:'代词',v:'动词',adj:'形容词',n:'名词',adv:'副词',det:'限定词',prep:'介词',conj:'连词',num:'数词',int:'感叹词'};
+  let html='';
+  // Translation & explanation
+  const s=S.sentences[S.idx];
+  html+=`<div class="kp-section">
+    <div class="kp-section-title">中文翻译</div>
+    <div class="kp-zh">${s.zh}</div>
+    <div class="kp-en-explain">${s.en}</div>
+  </div>`;
+  // Word detail
+  html+=`<div class="kp-section">
+    <div class="kp-section-title">单词/短语注解</div>
+    <div class="kp-word-item">
+      <div class="kp-word-head">
+        <span class="kp-word-text">${info.w}</span>
+        <span class="kp-word-pos ${cls}">${posLabel[info.ps]||info.ps}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span class="kp-word-phonetic">/${info.ph}/</span>
+      </div>
+      <div class="kp-word-meaning">${info.zh}</div>
+      ${info.sy.length?`<div class="kp-word-syn"><b>近义词：</b>${info.sy.join(', ')}</div>`:''}
+      ${info.an.length?`<div class="kp-word-ant"><b>反义词：</b>${info.an.join(', ')}</div>`:''}
+      ${info.ex?`<div class="kp-word-exam"><b>例句：</b>${info.ex}</div>`:''}
+      ${info.tp?`<div class="kp-word-tip"><b>💡 记忆：</b>${info.tp}</div>`:''}
+    </div>
+  </div>`;
+  $('kpBody').innerHTML=html;
+}
+
+// ======= INPUT HANDLING =======
+pin.addEventListener('input',function(){
+  const target=S.sentences[S.idx]?.en||'';
+  const input=pin.value;
+  let mhtml='';
+  for(let i=0;i<input.length;i++){
+    if(i<target.length&&input[i].toLowerCase()===target[i].toLowerCase())mhtml+=`<span class="m-correct">${input[i]}</span>`;
+    else if(i<target.length)mhtml+=`<span class="m-wrong">${input[i]}</span>`;
+    else mhtml+=`<span class="m-wrong">${input[i]}</span>`;
+  }
+  if(input.length<target.length)mhtml+=`<span class="m-cursor">&nbsp;</span>`;
+  mirror.innerHTML=mhtml||'<span class="m-cursor">&nbsp;</span>';
+});
+
+pin.addEventListener('focus',()=>mirror.classList.add('focus'));
+pin.addEventListener('blur',()=>mirror.classList.remove('focus'));
+
+pin.addEventListener('keydown',function(e){
+  if(pin.disabled)return;
+  if((e.key==='Enter'&&e.ctrlKey)||e.key==='Enter'){e.preventDefault();checkAnswer()}
+  else if(e.key==='ArrowRight'&&e.ctrlKey){e.preventDefault();goNext()}
+  else if(e.key==='s'&&e.ctrlKey){e.preventDefault();skipSentence()}
+  else if(e.key==='p'&&e.ctrlKey){e.preventDefault();speakSentence()}
+  else if(e.key==='m'&&e.ctrlKey){e.preventDefault();markMastered()}
+  else if(e.key==='n'&&e.ctrlKey){e.preventDefault();markNewWord()}
+});
+
+function checkAnswer(){
+  const input=pin.value.trim();
+  const target=S.sentences[S.idx].en;if(!input)return;
+  S.attempts++;const ok=input.toLowerCase()===target.toLowerCase();
+  if(ok){
+    S.correct++;S.combo++;S.todaySentences++;if(S.combo>S.maxCombo)S.maxCombo=S.combo;S.score+=S.combo>1?S.combo*10:10;S.sentenceStatus[S.idx]='ok';
+    if(S.level==='review')S.reviewQueue=S.reviewQueue.filter(s=>s.en!==target);S.incorrectSentences=S.incorrectSentences.filter(s=>s.en!==target);
+    revealSentence();
+    pin.disabled=true;
+    $('btnNext').style.display='';
+  }else{
+    S.combo=0;S.sentenceStatus[S.idx]='wrong';
+    const s=S.sentences[S.idx];if(!S.reviewQueue.find(r=>r.en===s.en))S.reviewQueue.push({zh:s.zh,en:s.en});if(!S.incorrectSentences.find(r=>r.en===s.en))S.incorrectSentences.push({zh:s.zh,en:s.en});
+  }
+  updateTopBar();saveData();showFeedback(ok,false);buildSentList();refreshSentListHighlight();
+}
+function skipSentence(){S.attempts++;S.sentenceStatus[S.idx]='wrong';pin.disabled=true;$('btnNext').style.display='';updateTopBar();showFeedback(false,true);buildSentList();refreshSentListHighlight();revealSentence()}
+function goNext(){if(S.idx>=S.sentences.length-1){showCompletion()}else{jumpTo(S.idx+1)}}
+function showFeedback(ok,skipped){
+  if(skipped){$('apFb').innerHTML='<span class="skip">已跳过</span>';$('apCombo').textContent=''}
+  else if(ok){const bonus=S.combo>1?S.combo*10:10;$('apFb').innerHTML=`<span class="ok">✅ 正确！+${bonus}分</span>`;if(S.combo>=5)$('apCombo').textContent=`🔥🔥 ${S.combo}连击！无敌了！`;else if(S.combo>=3)$('apCombo').textContent=`🔥 ${S.combo}连击！太棒了！`;else if(S.combo>=2)$('apCombo').textContent=`👍 连续${S.combo}次正确`;else $('apCombo').textContent=''}
+  else{$('apFb').innerHTML='<span class="bad">❌ 不对，再试试</span>';$('apCombo').textContent=''}
+}
+
+// ======= TTS =======
+function speakSentence(){
+  const s=S.sentences[S.idx];if(!s)return;
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(s.en);u.lang='en-US';u.rate=.85;u.pitch=1;window.speechSynthesis.speak(u);
+  }
+}
+
+function markMastered(){S.sentenceStatus[S.idx]='ok';S.todaySentences++;pin.disabled=true;revealSentence();updateTopBar();saveData();buildSentList();refreshSentListHighlight();$('apFb').innerHTML='<span class="ok">✅ 已标记为掌握</span>'}
+function markNewWord(){S.sentenceStatus[S.idx]='wrong';pin.disabled=true;revealSentence();buildSentList();refreshSentListHighlight();$('apFb').innerHTML='<span style="color:var(--ac)">📝 已标记为生词</span>';const s=S.sentences[S.idx];if(!S.reviewQueue.find(r=>r.en===s.en))S.reviewQueue.push({zh:s.zh,en:s.en});saveData()}
+
+// ======= COMPLETION =======
+function showCompletion(){
+  const acc=S.attempts>0?Math.round((S.correct/S.attempts)*100):0;
+  let g,t,gc;if(acc>=95){g='S';t='完美通关！';gc='s'}else if(acc>=80){g='A';t='非常优秀！';gc='a'}else if(acc>=60){g='B';t='继续加油！';gc='b'}else{g='C';t='多多练习！';gc='c'}
+  $('modalGrade').textContent=g;$('modalGrade').className='grade '+gc;$('modalTitle').textContent=t;
+  $('modalAcc').textContent=acc+'%';$('modalScore').textContent=S.score;$('modalCombo').textContent=S.maxCombo;
+  $('compModal').classList.add('show');
+  if(S.level!=='review'&&S.level!=='custom'){S.levelProgress[S.level]=Math.min(100,(S.levelProgress[S.level]||0)+5)}
+  saveData();updateTopBar()
+}
+function restartLevel(){$('compModal').classList.remove('show');startLevel()}
+
+// ======= CUSTOM EDITOR =======
+function processCustomText(){
+  const text=$('editorText').value.trim();if(!text)return;
+  const sents=text.split(/(?<=[.!?])\s+/).filter(s=>s.trim().length>3);
+  if(!sents.length){$('editorPreview').textContent='未找到有效句子';return}
+  DB.custom=sents.map(s=>({zh:'（自定义内容）',en:s.trim()}));
+  S.level='custom';S.sentences=shuffle(DB.custom).slice(0,Math.min(sents.length,10));
+  S.idx=0;resetRound();switchLeftTab('list');buildSentList();jumpTo(0);
+  $('editorPreview').textContent=`已生成 ${S.sentences.length} 道练习题`;
+  $('compModal').classList.remove('show');
+}
+
+// ======= TOP BAR =======
+function updateTopBar(){
+  $('hToday').textContent=S.todaySentences;
+  const acc=S.attempts>0?Math.round((S.correct/S.attempts)*100):0;
+  $('hAcc').textContent=S.attempts>0?acc+'%':'-';
+  $('hScore').textContent=S.score;$('hCombo').textContent=S.combo;
+}
+
+// Keyboard shortcut hint
+document.addEventListener('keydown',function(e){
+  if(!$('ac').classList.contains('on')||pin.disabled)return;
+  if(e.ctrlKey&&e.key==='Enter'){e.preventDefault();checkAnswer()}
+});
+
+loadData();
+</script>
+</body>
+</html>
